@@ -38,6 +38,15 @@ int main() {
 	initscr();
 	clear();
 
+	if(has_colors() == FALSE)
+	{	endwin();
+		printf("Your terminal does not support color\n");
+		exit(1);
+	}
+	start_color();
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+
 
 	noecho();
 	cbreak();	/* Line buffering disabled. pass on everything */
@@ -143,9 +152,11 @@ void clearsnake(body *bod, int size) {
 
 void drawsnake(body *bod, int size) {
 	int i;
+	attron(COLOR_PAIR(1));
 	for (i = 0; i < size; ++i)	{
 		mvprintw((bod+i)->row, (bod+i)->col, "0");
 	}
+	attroff(COLOR_PAIR(1));
 }
 
 void freesnake(body *head, int size) {
@@ -160,7 +171,9 @@ void redrawfood() {
 	foodx = rand() % maxx;
 	foody = rand() % maxy;
 
+	attron(COLOR_PAIR(2));
 	mvprintw(foody, foodx, "#");
+	attroff(COLOR_PAIR(2));
 
 }
 
