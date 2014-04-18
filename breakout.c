@@ -23,6 +23,7 @@ int main() {
 	keypad(stdscr, TRUE);
 
 	getmaxyx(stdscr, maxy, maxx);
+	bally = maxy/2;
 
 
 	mvprintw(maxy-1, 0, "=");
@@ -41,14 +42,18 @@ int main() {
 		switch(c) {
 			
 			case KEY_LEFT:
-				padx--;
-				mvprintw(maxy-1, padx, "=");
-				mvprintw(maxy-1, padx+PADDEL_SIZE, " ");
+				if(padx > 0) {
+					padx--;
+					mvprintw(maxy-1, padx, "=");
+					mvprintw(maxy-1, padx+PADDEL_SIZE, " ");
+				}
 				break;
 			case KEY_RIGHT:
-				padx++;
-				mvprintw(maxy-1, padx-1, " ");
-				mvprintw(maxy-1, padx+PADDEL_SIZE-1, "=");
+				if(padx < (maxx - PADDEL_SIZE)) {
+					padx++;
+					mvprintw(maxy-1, padx-1, " ");
+					mvprintw(maxy-1, padx+PADDEL_SIZE-1, "=");
+				}
 				break;
 			case -1:
 				break;
