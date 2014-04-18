@@ -6,6 +6,7 @@
 #define PADDEL_SIZE 20
 
 void moveball();
+void updateball();
 
 int maxx, maxy;
 int bally = 0, ballx = 0, balld = 5;
@@ -56,6 +57,7 @@ int main() {
 				refresh();
 				break;
 		}
+		updateball();
 		moveball();
 		refresh();
 	}	
@@ -89,4 +91,70 @@ void moveball() {
 			break;
 	}
 	mvprintw(bally, ballx, "o");
+	mvprintw(maxy-2, 0, "MAX : y:%d x:%d", maxy, maxx);
+	mvprintw(maxy-1, 0, "BALL: y:%d x:%d", bally, ballx);
+}
+
+void updateball() {
+	int x = ballx, y = bally;
+
+	switch(balld) {
+		case 12:
+			y--;
+			break;
+		case 1:
+			y--;
+			x++;
+			break;
+		case 5:
+			y++;
+			x++;
+			break;
+		case 6:
+			y++;
+			break;
+		case 7:
+			y++;
+			x--;
+			break;
+		case 11:
+			y--;
+			x--;
+			break;
+	}
+
+	char in = mvinch(y, x);
+	//mvprintw(maxy-1, 0, "READING: '%c'", in);
+	if((in != ' ' && in != 0) || (ballx < 0) || (bally < 0) || (ballx >= (maxx-1)) || (bally >= (maxy-1))) {
+		switch(balld) {
+			case 12:
+				balld = 5;
+				break;
+			case 1:
+				if(ballx >= (maxx-1)) {
+					balld = 11;
+				} else {
+					balld = 5;
+				}
+				break;
+			case 5:
+				if(ballx >= (maxx-1)) {
+					balld = 7;
+				} else {
+					balld = 1;
+				}
+				break;
+			case 6:
+				balld = 11;
+				break;
+			case 7:
+				balld = 11;
+				break;
+			case 11:
+				balld = 7;
+				break;
+		}
+	}
+
+
 }
