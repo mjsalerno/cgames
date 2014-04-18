@@ -148,10 +148,18 @@ void updateball() {
 				balld = 11;
 				break;
 			case 7:
-				balld = 11;
+				if(ballx < 0) {
+					balld = 5;
+				} else {
+					balld = 11;
+				}
 				break;
 			case 11:
-				balld = 7;
+				if(ballx < 0) {
+					balld = 1;
+				} else {
+					balld = 7;
+				}
 				break;
 		}
 	}
