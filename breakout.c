@@ -4,12 +4,15 @@
 #include <time.h>
 
 #define PADDEL_SIZE 20
+#define BLOCK_SYM '#'
 
 void moveball();
 void updateball();
+void drawblocks(int rows);
 
 int maxx, maxy;
 int bally = 0, ballx = 0, balld = 5;
+int blocks = 0;
 
 int main() {
 
@@ -31,6 +34,7 @@ int main() {
 		printw("=");
 	}
 
+	drawblocks(3);
 
 	refresh();
 
@@ -98,6 +102,8 @@ void moveball() {
 	mvprintw(bally, ballx, "o");
 	mvprintw(maxy-2, 0, "MAX : y:%d x:%d", maxy, maxx);
 	mvprintw(maxy-1, 0, "BALL: y:%d x:%d", bally, ballx);
+	mvprintw(0, 0, "BLOCKS: %3d", blocks);
+	//mvprintw(0, maxx - 10, "LINES: %2d", lives);
 }
 
 void updateball() {
@@ -131,6 +137,10 @@ void updateball() {
 	char in = mvinch(y, x);
 	//mvprintw(maxy-1, 0, "READING: '%c'", in);
 	if((in != ' ' && in != 0) || (ballx < 0) || (bally < 0) || (ballx >= (maxx-1)) || (bally >= (maxy-1))) {
+		if(in == '#') {
+			mvprintw(y,x," ");
+			blocks--;
+		}
 		switch(balld) {
 			case 12:
 				balld = 5;
@@ -169,5 +179,18 @@ void updateball() {
 		}
 	}
 
+
+}
+
+void drawblocks(int rows) {
+
+	for (int i = 1; i < rows+1; ++i) {
+		move(i, 0);
+
+		for (int j = 0; j < maxx; ++j) {
+			addch(BLOCK_SYM);
+			blocks++;
+		}
+	}
 
 }
