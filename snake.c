@@ -13,6 +13,7 @@ void drawsnake(body *bod, int size);
 void clearsnake(body *bod, int size);
 void redrawfood();
 int checklose(body *head, int size);
+void setupcolor();
 
 struct Body {
    int row;
@@ -37,17 +38,7 @@ int main() {
 
 	initscr();
 	clear();
-
-	if(has_colors() == FALSE)
-	{	endwin();
-		printf("Your terminal does not support color\n");
-		exit(1);
-	}
-	start_color();
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
-
-
+	setupcolor();
 	noecho();
 	cbreak();	/* Line buffering disabled. pass on everything */
 	curs_set(0);
@@ -192,4 +183,15 @@ int checklose(body *head, int size) {
 	}
 
 	return 0;
+}
+
+void setupcolor() {
+	if(has_colors() == FALSE) {
+		endwin();
+		printf("Your terminal does not support color\n");
+		exit(1);
+	}
+	start_color();
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 }
