@@ -41,7 +41,7 @@ int main() {
 
 	refresh();
 
-	halfdelay(1);
+	halfdelay(0);
 
 	while(1) {
 		int c = getch();
@@ -84,26 +84,40 @@ void moveball() {
 	mvprintw(bally, ballx, " ");
 	switch(balld) {
 		case 12:
-			bally--;
+			bally -= 2;
 			break;
 		case 1:
-			bally--;
-			ballx++;
+			bally -= 2;
+			ballx += 1;
 			break;
+		case 2:
+			bally -= 1;
+			ballx += 2;
+			break;
+		case 4:
+			bally += 1;
+			ballx += 2;
 		case 5:
-			bally++;
-			ballx++;
+			bally += 2;
+			ballx += 1;
 			break;
 		case 6:
-			bally++;
+			bally += 2;
 			break;
 		case 7:
-			bally++;
-			ballx--;
+			bally += 2;
+			ballx -= 1;
 			break;
+		case 8:
+			bally += 1;
+			ballx -= 2;
+			break;
+		case 10:
+			bally -= 1;
+			ballx -= 2;
 		case 11:
-			bally--;
-			ballx--;
+			bally -= 2;
+			ballx -= 1;
 			break;
 	}
 	attron(COLOR_PAIR(2));
@@ -146,7 +160,7 @@ void updateball() {
 	char in = mvinch(y, x);
 	//mvprintw(maxy-1, 0, "READING: '%c'", in);
 	if((in != ' ' && in != 0) || (ballx < 1) || (bally < 0) || (ballx >= (maxx-1)) || (bally >= (maxy-1))) {
-		if(in == '#') {
+		if(in == BLOCK_SYM) {
 			mvprintw(y,x," ");
 			blocks--;
 		}
@@ -189,6 +203,11 @@ void updateball() {
 	}
 
 
+}
+
+int collisiondetection() {
+	//TODO: actually fill this out
+	return -1;
 }
 
 void drawblocks(int rows) {
