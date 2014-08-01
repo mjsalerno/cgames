@@ -47,7 +47,7 @@ int main() {
 		int c = getch();
 
 		switch(c) {
-			
+
 			case KEY_LEFT:
 				if(padx > 0) {
 					padx--;
@@ -76,7 +76,7 @@ int main() {
 		updateball();
 		moveball();
 		refresh();
-	}	
+	}
 }
 
 
@@ -227,7 +227,7 @@ void drawblocks(int rows) {
 }
 
 void colorsetup() {
-	if(has_colors() == FALSE) {	
+	if(has_colors() == FALSE) {
 		endwin();
 		printf("Your terminal does not support color\n");
 		exit(1);

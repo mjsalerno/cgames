@@ -27,7 +27,7 @@ int foodx = 0, foody = 0;
 int main() {
 	int c = KEY_RIGHT, newc;
 
-	int row = 0, col = 0;		
+	int row = 0, col = 0;
 	int size = 1;
 	int lost = 0;
 
@@ -82,7 +82,7 @@ int main() {
 
 		if(foody == snakebody->row && foodx == snakebody->col) {
 
-			
+
 			(snakebody+size)->row = 0;
 			(snakebody+size)->col = 0;
 			(snakebody+size)->direc = KEY_RIGHT;
@@ -102,7 +102,7 @@ int main() {
 		}
 
 		refresh();
-	}	
+	}
 }
 
 void movesnake(body *bod, int size, int direc) {
@@ -171,7 +171,7 @@ void redrawfood() {
 int checklose(body *head, int size) {
 	int i;
 
-	if(head->row >= maxy || head->col >= maxx 
+	if(head->row >= maxy || head->col >= maxx
 	   || head->row < 0 || head->col < 0) {
 		return 1;
 	}
