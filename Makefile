@@ -5,19 +5,19 @@ LIBS=-lcurses
 all:	snake breakout tetris
 
 tetris: tetris.o
-	$(CC) $(CFLAGS) $(LIBS) tetris.o -o tetris
+	$(CC) $(CFLAGS) tetris.o -o tetris $(LIBS)
 
 tetris.o: tetris.c
-	$(CC) $(CFLAGS) $(LIBS) -c tetris.c
+	$(CC) $(CFLAGS) -c tetris.c
 
 breakout: breakout.o
-	$(CC) $(CFLAGS) $(LIBS) breakout.o -o breakout
+	$(CC) $(CFLAGS) breakout.o -o breakout $(LIBS)
 
 breakout.o: breakout.c
-	$(CC) $(CFLAGS) $(LIBS) -c breakout.c
+	$(CC) $(CFLAGS) -c breakout.c
 
 snake: snake.o
-	$(CC) $(CFLAGS) $(LIBS) snake.o -o snake
+	$(CC) $(CFLAGS) snake.o -o snake $(LIBS)
 
 snake.o: snake.c
 	$(CC) $(CFLAGS) -c snake.c
